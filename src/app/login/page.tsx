@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { portalTheme } from "../../lib/portal-config";
 
 export default function PlanningCenterLoginPage() {
   console.info("[portal:planning-center]", { status: "oidc-placeholder-reached" });
@@ -7,7 +8,7 @@ export default function PlanningCenterLoginPage() {
   return (
     <main className="portal-shell">
       <section className="portal-card confirmation-card" aria-labelledby="login-title">
-        <Image className="portal-logo" src="/lemc-main-colors.png" alt="LEMC" width={174} height={174} priority />
+        <Image className="portal-logo" src={portalTheme.logoPath} alt="LEMC" width={174} height={174} priority />
         <div className="portal-heading">
           <p className="eyebrow">Planning Center</p>
           <h1 id="login-title">Sign-in is coming next.</h1>

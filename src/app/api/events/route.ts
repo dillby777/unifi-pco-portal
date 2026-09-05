@@ -19,6 +19,8 @@ export async function POST(request: Request) {
     ? body.redirectContext
     : "";
 
-  console.info("[portal:action]", { action: body.action, redirectContext });
+  if (process.env.NODE_ENV === "development") {
+    console.info("[portal:action]", { action: body.action, redirectContext });
+  }
   return NextResponse.json({ recorded: true });
 }

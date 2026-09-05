@@ -6,6 +6,9 @@
   --ink: #17241f;
   --pco: #2d7e9b;
   --pco-hover: #236b85;
+  --background-accent: #315b4c;
+  --primary-hover: #294e40;
+  --portal-font: Raleway, "Helvetica Neue", sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -16,7 +19,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--forest-deep);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--portal-font);
 }
 
 button, a { font: inherit; }
@@ -30,7 +33,7 @@ button, a { font: inherit; }
   overflow: hidden;
   background:
     linear-gradient(125deg, rgba(145, 165, 143, 0.2), transparent 45%),
-    radial-gradient(ellipse at 100% 0%, #315b4c 0%, transparent 46%),
+    radial-gradient(ellipse at 100% 0%, var(--background-accent) 0%, transparent 46%),
     var(--forest-deep);
 }
 
@@ -42,6 +45,16 @@ button, a { font: inherit; }
   border-radius: 50%;
   content: "";
   transform: translate(42%, -42%);
+}
+
+body[data-portal-accent="logo"] .portal-shell::before {
+  width: min(54vw, 900px);
+  height: min(54vw, 900px);
+  border: 0;
+  border-radius: 0;
+  background: var(--portal-accent-logo) center / contain no-repeat;
+  opacity: 0.22;
+  transform: translate(38%, -38%);
 }
 
 .portal-card {
@@ -88,9 +101,8 @@ h1 { max-width: 340px; margin: 0; font-size: clamp(2rem, 7vw, 2.85rem); font-wei
   border: 0;
   border-radius: 6px;
   cursor: pointer;
-  font-family: "Trebuchet MS", sans-serif;
   font-size: 0.94rem;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
@@ -101,11 +113,16 @@ h1 { max-width: 340px; margin: 0; font-size: clamp(2rem, 7vw, 2.85rem); font-wei
 .button:focus-visible { outline: 3px solid #bd9c50; outline-offset: 3px; }
 .button:disabled { cursor: wait; opacity: 0.7; transform: none; }
 .button-primary { color: var(--mist); background: var(--forest); }
-.button-primary:hover { background: #294e40; }
-.button-pco { color: #fff; background: var(--pco); }
-.button-pco:hover { background: var(--pco-hover); }
+.button-primary:hover { background: var(--primary-hover);color: var(--forest); }
+.button-pco { color: var(--pco); background: var(--pco); border: 1px solid color-mix(in srgb, var(--pco) 26%, transparent); }
+.button-pco:hover { background: #f2f5f5; }
 
-.pco-mark { font-family: Georgia, serif; font-size: 1.1rem; font-style: italic; font-weight: 700; }
+.planning-center-logo-set { display: contents; }
+.planning-center-logo { width: min(205px, 72%); height: auto; }
+.planning-center-logo-default { display: block; }
+.planning-center-logo-hover { display: none; }
+.button-pco:hover .planning-center-logo-default, .button-pco:focus-visible .planning-center-logo-default { display: none; }
+.button-pco:hover .planning-center-logo-hover, .button-pco:focus-visible .planning-center-logo-hover { display: block; }
 .action-divider { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 11px; color: #718077; font-family: "Trebuchet MS", sans-serif; font-size: 0.75rem; }
 .action-divider::before, .action-divider::after { height: 1px; background: #d8d7ce; content: ""; }
 .confirmation-card { min-height: 500px; align-content: center; }

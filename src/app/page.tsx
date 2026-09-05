@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { portalTheme } from "../lib/portal-config";
 import { PortalActions } from "./portal-actions";
 
 type HomePageProps = {
@@ -17,27 +18,28 @@ export default async function HomePage({ searchParams, requestedPathname = "/" }
   }
 
   const requestedPath = query.size > 0 ? `${requestedPathname}?${query.toString()}` : requestedPathname;
-  console.info("[portal:request]", { requestedPath });
+  if (process.env.NODE_ENV === "development") {
+    console.info("[portal:request]", { requestedPath });
+  }
 
   return (
     <main className="portal-shell">
       <section className="portal-card" aria-labelledby="portal-title">
         <Image
           className="portal-logo"
-          src="/lemc-main-colors.png"
+          src={portalTheme.logoPath}
           alt="LEMC"
           width={174}
           height={174}
           priority
         />
         <div className="portal-heading">
-          <p className="eyebrow">Guest network</p>
-          <h1 id="portal-title">Welcome to &quot;LEMC&apos;s WiFi&quot;</h1>
+          <h1 id="portal-title">Welcome to the LEMC WiFi</h1>
           <p className="lede">Choose how you&apos;d like to get connected.</p>
         </div>
         <PortalActions redirectContext={query.toString()} />
       </section>
-      <p className="portal-footer">LEMC guest access</p>
+      <p className="portal-footer">LEMC WiFi access</p>
     </main>
   );
 }
